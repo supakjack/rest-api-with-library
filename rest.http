@@ -50,6 +50,17 @@ Content-Type: application/json
   "table":{
     "name": "users",
     "condition" : {"id" : 1},
-    "updateData" : {"username":"jackupdate1"}
+    "updateData" : {"username":"jackupdate11"}
+  }
+}
+
+### delete user Route
+POST http://localhost:3000/user/remove
+Content-Type: application/json
+
+{
+  "table":{
+    "name": "users",
+    "condition" : {"id" : 27}
   }
 }

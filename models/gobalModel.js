@@ -47,5 +47,16 @@ module.exports = {
         reject(createError.InternalServerError())
       }
     })
+  },
+  delete: async (table) => {
+    return new Promise((resolve, reject) => {
+      try {
+        const doseDelete = knex(table.name).where(table.condition).del()
+        resolve(doseDelete)
+      } catch (error) {
+        console.log(error.message)
+        reject(createError.InternalServerError())
+      }
+    })
   }
 }
