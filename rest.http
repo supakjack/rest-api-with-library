@@ -1,0 +1,55 @@
+### drop table Route
+POST http://localhost:3000/migration/clear
+Content-Type: application/json
+
+{
+  "name": "users"
+}
+
+### create table Users Route
+GET http://localhost:3000/migration/createUser
+
+### insert user Route
+POST http://localhost:3000/user/add
+Content-Type: application/json
+
+{
+  "table":{
+    "name": "users",
+    "insertData" : [
+      {
+        "username":"jack",
+        "email":"jack@email.com",
+        "password":"jack@123"
+      },
+      {"email":"jack@email.com"},
+      {"password":"jack@123"}
+    ]
+  }
+}
+
+### select user Route
+POST http://localhost:3000/user/select
+Content-Type: application/json
+
+{
+  "table":{
+    "name": "users",
+    "filter" : [
+      "id",
+      "username"
+    ]
+  }
+}
+
+### update user Route
+POST http://localhost:3000/user/update
+Content-Type: application/json
+
+{
+  "table":{
+    "name": "users",
+    "condition" : {"id" : 1},
+    "updateData" : {"username":"jackupdate1"}
+  }
+}
