@@ -5,11 +5,17 @@ const {
   userDeleteDataSchema
 } = require('./../helpers/validation_schema')
 const gobalModel = require('../models/gobalModel')
+const bcrypt = require('bcrypt')
 
 module.exports = {
   add: async (req, res, next) => {
     try {
       const userInsertData = await userInsertDataSchema.validateAsync(req.body)
+      const salt = await bcrypt.genSalt(10)
+      console.log(userInsertData.table.insertData[0].password)
+      const hashPassword = await bcrypt.hash(userInsertData.table.insertData[0].password, salt)
+      console.log(hashPassword)
+      userInsertData.table.insertData[0].password = hashPassword 
       const doesInsert = await gobalModel.insert(userInsertData.table)
       res.status(201).send({ doesInsert })
     } catch (error) {

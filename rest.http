@@ -1,3 +1,7 @@
+### get resource Route
+GET http://localhost:3000/
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpYXQiOjE1OTk0NTE1NjksImV4cCI6MTU5OTQ1MTU5OSwiYXVkIjoiNyIsImlzcyI6ImphY2ttb2JpbGUuY29tIn0.pHA2eOrQHGgvLC6IDG9cqhyLMPUPvYOMD7nVb8MAwtI
+
 ### drop table Route
 POST http://localhost:3000/migration/clear
 Content-Type: application/json
@@ -18,12 +22,10 @@ Content-Type: application/json
     "name": "users",
     "insertData" : [
       {
-        "username":"jack",
-        "email":"jack@email.com",
-        "password":"jack@123"
-      },
-      {"email":"jack@email.com"},
-      {"password":"jack@123"}
+        "username":"testusername1",
+        "email":"test@email.com1",
+        "password":"testpassword1"
+      }
     ]
   }
 }
@@ -31,13 +33,15 @@ Content-Type: application/json
 ### select user Route
 POST http://localhost:3000/user/select
 Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpYXQiOjE1OTk0NTE1NjksImV4cCI6MTU5OTQ1MTU5OSwiYXVkIjoiNyIsImlzcyI6ImphY2ttb2JpbGUuY29tIn0.pHA2eOrQHGgvLC6IDG9cqhyLMPUPvYOMD7nVb8MAwtI
 
 {
   "table":{
     "name": "users",
     "filter" : [
       "id",
-      "username"
+      "username",
+      "password"
     ]
   }
 }
@@ -64,3 +68,30 @@ Content-Type: application/json
     "condition" : {"id" : 27}
   }
 }
+
+### auth login Route
+POST http://localhost:3000/auth/login
+Content-Type: application/json
+
+{
+  "username" : "testusername1",
+  "password" : "testpassword1"
+}
+
+### auth Refresh Token Route
+POST http://localhost:3000/auth/refresh
+Content-Type: application/json
+
+{
+  "refreshToken" : "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpYXQiOjE1OTk0NDkxNjEsImV4cCI6MTYzMTAwNjc2MSwiYXVkIjoiNyIsImlzcyI6ImphY2ttb2JpbGUuY29tIn0.YEKaUlwxFgVNP0aji6Ikw98IacFYWepZ8xs21147kw8"
+}
+
+### auth Logout Route
+POST http://localhost:3000/auth/logout
+Content-Type: application/json
+
+{
+  "refreshToken" : "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpYXQiOjE1OTk0NTAyNjEsImV4cCI6MTYzMTAwNzg2MSwiYXVkIjoiNyIsImlzcyI6ImphY2ttb2JpbGUuY29tIn0.FBO_QBsU1uexDtO1bLaHuSwiyne9Br5UdYv5WZbp4OU"
+}
+
+

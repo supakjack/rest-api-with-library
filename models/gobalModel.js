@@ -2,17 +2,6 @@ const knex = require('./../helpers/init_knex')
 const createError = require('http-errors')
 
 module.exports = {
-  dropTable: async (nameTable) => {
-    return new Promise((resolve, reject) => {
-      try {
-        const doseDroptable = knex.schema.dropTableIfExists(nameTable)
-        resolve(doseDroptable)
-      } catch (error) {
-        console.log(error.message)
-        reject(createError.InternalServerError())
-      }
-    })
-  },
   insert: async (table) => {
     return new Promise((resolve, reject) => {
       try {
@@ -28,6 +17,11 @@ module.exports = {
     return new Promise((resolve, reject) => {
       try {
         const doseSelect = knex.select(table.filter).from(table.name)
+        if (table.condition) {
+          table.condition.forEach((condition) => {
+            doseSelect.where(condition)
+          })
+        }
         resolve(doseSelect)
       } catch (error) {
         console.log(error.message)

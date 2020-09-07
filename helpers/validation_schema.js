@@ -10,7 +10,8 @@ const userInsertDataSchema = joi.object({
 const userSelectDataSchema = joi.object({
   table: {
     name: joi.string().required(),
-    filter: joi.array()
+    filter: joi.array(),
+    condition: joi.array()
   }
 })
 
@@ -30,9 +31,15 @@ const userDeleteDataSchema = joi.object({
   }
 })
 
+const userDataSchema = joi.object({
+  username: joi.string().required(),
+  password: joi.string()
+})
+
 module.exports = {
   userInsertDataSchema,
   userSelectDataSchema,
   userUpdateDataSchema,
-  userDeleteDataSchema
+  userDeleteDataSchema,
+  userDataSchema
 }
